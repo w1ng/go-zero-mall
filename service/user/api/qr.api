@@ -1,0 +1,30 @@
+type (
+	// 二维码验证
+	AuthRequest {
+		QrCode string `json:"qrCode"`
+	}
+	AuthResponse {
+		AuthCount  int64 `json:"authCount"`
+		AuthExpire int64 `json:"authExpire"`
+	}
+	// 二维码验证
+
+	// 二维码添加
+	RegisterRequest {
+		QrCode    string `json:"qrCode"`
+		AuthCount int64  `json:"authCount"`
+	}
+	RegisterResponse {
+		Id int64 `json:"id"`
+	}
+	// 二维码添加
+
+)
+
+service Qr {
+	@handler Auth
+	post /api/qr/auth(AuthRequest) returns (AuthResponse)
+	
+	@handler Register
+	post /api/qr/register(RegisterRequest) returns (RegisterResponse)
+}
